@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 class HeaderScreen extends StatelessWidget implements PreferredSizeWidget {
   const HeaderScreen({super.key});
   @override
-  Size get preferredSize => const Size.fromHeight(60);
+  Size get preferredSize => const Size.fromHeight(80);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Colors.yellow,
         centerTitle: true,
         elevation: 4,
         shadowColor: Colors.black26,
@@ -24,7 +24,10 @@ class HeaderScreen extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            // Implement navigation or menu action here
+            debugPrint("Menu button pressed");
+          },
           icon: const Icon(
             Icons.home_mini_outlined,
             color: Colors.brown,
@@ -32,6 +35,18 @@ class HeaderScreen extends StatelessWidget implements PreferredSizeWidget {
           ),
           tooltip: 'Menu',
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              // ação do botão à direita
+            },
+            icon: const Badge(
+              label: Text('4'),
+              child: Icon(Icons.list),
+            ),
+            tooltip: 'Pedidos',
+          ),
+        ],
       ),
     );
   }

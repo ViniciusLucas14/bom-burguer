@@ -1,10 +1,13 @@
 import 'package:bom_hamburguer/models/item_model.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class Item extends StatelessWidget {
-  const Item(
+  Function(ItemModel item) onTap;
+  Item(
     Key? key, {
     required this.item,
+    required this.onTap,
   }) : super(key: key);
 
   final ItemModel item;
@@ -16,7 +19,7 @@ class Item extends StatelessWidget {
         builder: (_, constraints) {
           return InkWell(
             onTap: () => {
-              debugPrint("Item tapped: ${item.name}"),
+              onTap(item),
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -29,7 +32,6 @@ class Item extends StatelessWidget {
                       Hero(
                         tag: item.id,
                         child: Image.asset(
-                          // item.images,
                           item.images,
                           width: constraints.maxWidth * 0.8,
                           fit: BoxFit.cover,

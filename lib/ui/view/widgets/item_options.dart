@@ -1,8 +1,10 @@
+import 'package:bom_hamburguer/enum/item_options_enum.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ItemOptions extends StatefulWidget {
-  const ItemOptions({super.key});
-
+  Function(ItemOptionEnum option) optionSelectedCallback;
+  ItemOptions({super.key, required this.optionSelectedCallback});
   @override
   State<ItemOptions> createState() => _ItemOptionsState();
 }
@@ -17,7 +19,11 @@ class _ItemOptionsState extends State<ItemOptions> {
       onDestinationSelected: (int index) {
         setState(() {
           _selectedIndex = index;
-          debugPrint("FloatingActionButton pressed");
+          if (index == 0) {
+            widget.optionSelectedCallback(ItemOptionEnum.sandwich);
+          } else if (index == 1) {
+            widget.optionSelectedCallback(ItemOptionEnum.extras);
+          }
         });
       },
       destinations: const <NavigationRailDestination>[

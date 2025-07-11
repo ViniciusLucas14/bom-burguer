@@ -1,10 +1,18 @@
+import 'package:bom_hamburguer/enum/item_options_enum.dart';
 import 'package:bom_hamburguer/ui/view/header__screen.dart';
 import 'package:bom_hamburguer/ui/view/widgets/items_list.dart';
 import 'package:bom_hamburguer/ui/view/widgets/item_options.dart';
+import 'package:bom_hamburguer/ui/viewModel/item_list_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ItemListViewModel(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -12,7 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Bom Hambúrguer Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -29,13 +37,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // int _counter = 0;
-
-  // void _incrementCounter() {
-  //   setState(() {
-  //     _counter++;
-  //   });
-  // }
+  ItemOptionEnum optionSelected = ItemOptionEnum.sandwich;
+  changeOption(ItemOptionEnum option) {
+    setState(() {
+      optionSelected = option;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,20 +53,13 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const ItemOptions(),
+            ItemOptions(optionSelectedCallback: changeOption),
             Expanded(
-              child: Container(
-                child: const ItemsList(),
-              ),
+              child: ItemsList(filterByOptionCallback: optionSelected),
             ),
           ],
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: const Icon(Icons.add),
-      // ),
     );
   }
 }
