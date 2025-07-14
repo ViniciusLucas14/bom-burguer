@@ -1,3 +1,4 @@
+import 'package:bom_hamburguer/main.dart';
 import 'package:flutter/material.dart';
 
 class HeaderScreen extends StatelessWidget implements PreferredSizeWidget {
@@ -25,8 +26,9 @@ class HeaderScreen extends StatelessWidget implements PreferredSizeWidget {
         ),
         leading: IconButton(
           onPressed: () {
-            // Implement navigation or menu action here
-            debugPrint("Menu button pressed");
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const HomePage()),
+            );
           },
           icon: const Icon(
             Icons.home_mini_outlined,

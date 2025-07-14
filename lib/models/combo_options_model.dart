@@ -1,24 +1,32 @@
-import 'package:bom_hamburguer/models/cart_model.dart';
+import 'package:bom_hamburguer/models/item_options_model.dart';
 import 'package:bom_hamburguer/models/item_model.dart';
 
 class ComboOption {
   final String name;
   final List<ItemModel> items;
   final double discountPercentage;
-  final double total;
-  final double subtotal;
   final String imagePath;
 
   ComboOption({
     required this.name,
     required this.items,
     required this.discountPercentage,
-    required this.total,
-    required this.subtotal,
     required this.imagePath,
   });
 
-  static List<ComboOption> generateCombos(CartOptionsModel cartOptions) {
+  double get discountAmount {
+    return subtotal * (discountPercentage / 100);
+  }
+
+  double get subtotal {
+    return items.fold<double>(0, (sum, item) => sum + item.price);
+  }
+
+  double get total {
+    return subtotal - discountAmount;
+  }
+
+  static List<ComboOption> generateCombos(ItemOptionsModel cartOptions) {
     final sandwich = cartOptions.itemSelected;
 
     final fries = cartOptions.extrasAvailable.firstWhere(
@@ -38,9 +46,7 @@ class ComboOption {
         name: "Combo 1: ${sandwich.name} + ${fries.name} + ${softDrink.name}",
         items: [sandwich, fries, softDrink],
         discountPercentage: 20,
-        total: (sandwich.price + fries.price + softDrink.price) * 0.80,
-        subtotal: sandwich.price + fries.price + softDrink.price,
-        imagePath: "",
+        imagePath: "assets/images/combo/${sandwich.name}1.png",
       ));
     }
 
@@ -49,9 +55,7 @@ class ComboOption {
         name: "Combo 2: ${sandwich.name} + ${softDrink.name}",
         items: [sandwich, softDrink],
         discountPercentage: 15,
-        total: (sandwich.price + softDrink.price) * 0.85,
-        subtotal: sandwich.price + softDrink.price,
-        imagePath: "",
+        imagePath: "assets/images/combo/${sandwich.name}2.png",
       ));
     }
 
@@ -60,9 +64,7 @@ class ComboOption {
         name: "Combo 3:  ${sandwich.name} + ${fries.name}",
         items: [sandwich, fries],
         discountPercentage: 10,
-        total: (sandwich.price + fries.price) * 0.90,
-        subtotal: sandwich.price + fries.price,
-        imagePath: "",
+        imagePath: "assets/images/combo/${sandwich.name}3.png",
       ));
     }
     return combos;

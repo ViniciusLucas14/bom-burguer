@@ -1,15 +1,19 @@
 import 'package:bom_hamburguer/enum/item_options_enum.dart';
-import 'package:bom_hamburguer/ui/view/header__screen.dart';
+import 'package:bom_hamburguer/ui/view/header_screen.dart';
 import 'package:bom_hamburguer/ui/view/widgets/items_list.dart';
 import 'package:bom_hamburguer/ui/view/widgets/item_options.dart';
+import 'package:bom_hamburguer/ui/viewModel/cart_view_model.dart';
 import 'package:bom_hamburguer/ui/viewModel/item_list_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => ItemListViewModel(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ItemListViewModel()),
+        ChangeNotifierProvider(create: (_) => CartViewModel()),
+      ],
       child: const MyApp(),
     ),
   );
