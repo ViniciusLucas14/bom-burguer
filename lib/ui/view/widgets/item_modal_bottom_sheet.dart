@@ -1,7 +1,7 @@
+import 'package:bom_hamburguer/models/cart_model.dart';
 import 'package:bom_hamburguer/models/item_options_model.dart';
 import 'package:bom_hamburguer/models/combo_options_model.dart';
 import 'package:bom_hamburguer/models/item_model.dart';
-import 'package:bom_hamburguer/ui/view/cart_screen.dart';
 import 'package:bom_hamburguer/ui/view/widgets/item_combo_cart.dart';
 import 'package:bom_hamburguer/ui/view/widgets/item_normal_cart.dart';
 import 'package:bom_hamburguer/ui/viewModel/cart_view_model.dart';
@@ -24,27 +24,40 @@ class ItemModalBottomSheet extends StatelessWidget {
       itemSelected: item,
       extrasAvailable: extraItems,
     );
-    final combos = ComboOption.generateCombos(cartOptions);
 
-    // ✅ Get the CartViewModel from Provider
+    final combos = ComboOption.generateCombos(cartOptions);
     final cart = Provider.of<CartViewModel>(context, listen: false);
 
-    void comboSelected(ComboOption combo) {
-      for (final i in combo.items) {
-       // cart.addItem(i);
-      }
-
-      Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => const CartScreen()),
+    Future<void> comboSelected(ComboOption combo) async {
+      var cartItem = CartModel(
+        isCombo: true,
+        name: combo.name,
+        img: combo.imagePath,
+        total: combo.total,
+        subTotal: combo.subtotal,
+        discount: combo.discountAmount,
+        itemsList: combo.items.map((e) => e.id).join(','),
+        date: DateTime.now(),
       );
+      await cart.addItem(cartItem);
+      if (!context.mounted) return;
+      Navigator.pop(context);
     }
 
-    void singleItemSelected(ItemModel item) {
-      //cart.addItem(item);
-
-      Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => const CartScreen()),
+    Future<void> itemNormalSelected(ItemModel item) async {
+      var cartItem = CartModel(
+        isCombo: false,
+        name: item.name,
+        img: item.images,
+        total: item.price,
+        subTotal: item.price,
+        discount: 0.0,
+        itemsList: item.id.toString(),
+        date: DateTime.now(),
       );
+      await cart.addItem(cartItem);
+      if (!context.mounted) return;
+      Navigator.pop(context);
     }
 
     return SizedBox(
@@ -62,7 +75,7 @@ class ItemModalBottomSheet extends StatelessWidget {
                         ItemNormalCart(
                           const Key('item_0'),
                           item: item,
-                          onTap: singleItemSelected,
+                          onTap: itemNormalSelected,
                         ),
                       ],
                     ),
@@ -120,7 +133,7 @@ class ItemModalBottomSheet extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      singleItemSelected(item);
+                      itemNormalSelected(item);
                     },
                   ),
                 ),

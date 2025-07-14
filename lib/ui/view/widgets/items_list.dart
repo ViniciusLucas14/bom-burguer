@@ -43,7 +43,7 @@ class _ItemsListState extends State<ItemsList> {
           await Provider.of<ItemListViewModel>(context, listen: false)
               .fetchItemsExtraList();
     }
-
+    if (!mounted) return;
     showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {

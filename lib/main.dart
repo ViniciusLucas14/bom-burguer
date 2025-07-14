@@ -1,9 +1,11 @@
 import 'package:bom_hamburguer/enum/item_options_enum.dart';
+import 'package:bom_hamburguer/ui/view/cart_screen.dart';
 import 'package:bom_hamburguer/ui/view/header_screen.dart';
 import 'package:bom_hamburguer/ui/view/widgets/items_list.dart';
 import 'package:bom_hamburguer/ui/view/widgets/item_options.dart';
 import 'package:bom_hamburguer/ui/viewModel/cart_view_model.dart';
 import 'package:bom_hamburguer/ui/viewModel/item_list_view_model.dart';
+import 'package:bom_hamburguer/ui/viewModel/payment_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +15,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => ItemListViewModel()),
         ChangeNotifierProvider(create: (_) => CartViewModel()),
+        ChangeNotifierProvider(create: (_) => PaymentViewModel()),
       ],
       child: const MyApp(),
     ),
@@ -64,6 +67,16 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const CartScreen()),
+          );
+        },
+        label: const Text('Cart'),
+        icon: const Icon(Icons.shopping_cart),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }

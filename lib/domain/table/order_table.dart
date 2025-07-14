@@ -5,5 +5,6 @@ class OrderTable extends Table {
   RealColumn get total => real()();
   RealColumn get subTotal => real()();
   RealColumn get discount => real()();
+  TextColumn get paymentMethod => text()();
   DateTimeColumn get date => dateTime()();
 }

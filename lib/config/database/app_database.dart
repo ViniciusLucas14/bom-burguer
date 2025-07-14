@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:bom_hamburguer/domain/table/cart_table.dart';
 import 'package:bom_hamburguer/domain/table/item_table.dart';
 import 'package:bom_hamburguer/domain/table/order_item_table.dart';
 import 'package:bom_hamburguer/domain/table/order_table.dart';
@@ -13,13 +14,13 @@ import 'package:sqlite3_flutter_libs/sqlite3_flutter_libs.dart';
 part 'app_database.g.dart';
 
 /// Tables inside [tables] list
-@DriftDatabase(tables: [ItemTable, TypeItemTable, OrderTable, OrderItemTable])
-
+@DriftDatabase(
+    tables: [CartTable, ItemTable, TypeItemTable, OrderTable, OrderItemTable])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   @override
   MigrationStrategy get migration {
@@ -79,9 +80,9 @@ class AppDatabase extends _$AppDatabase {
         }
       },
       onUpgrade: (Migrator m, int from, int to) async {
-        // if (from == 1) {
-        //   //TO DO
-        // }
+        if (from == 1) {
+          await m.createAll();
+        }
       },
     );
   }
@@ -94,9 +95,11 @@ LazyDatabase _openConnection() {
     if (Platform.isAndroid) {
       await applyWorkaroundToOpenSqlite3OnOldAndroidVersions();
     }
+
     /// Make sqlite3 pick a more suitable location for temporary files - the
     /// one from the system may be inaccessible due to sandboxing.
     final cachebase = (await getTemporaryDirectory()).path;
+
     /// We can't access /tmp on Android, which sqlite3 would try by default.
     /// Explicitly tell it about the correct temporary directory.
     sqlite3.tempDirectory = cachebase;

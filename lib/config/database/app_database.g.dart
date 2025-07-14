@@ -3,6 +3,453 @@
 part of 'app_database.dart';
 
 // ignore_for_file: type=lint
+class $CartTableTable extends CartTable
+    with TableInfo<$CartTableTable, CartTableData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $CartTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _isComboMeta =
+      const VerificationMeta('isCombo');
+  @override
+  late final GeneratedColumn<bool> isCombo = GeneratedColumn<bool>(
+      'is_combo', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("is_combo" IN (0, 1))'));
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _imgMeta = const VerificationMeta('img');
+  @override
+  late final GeneratedColumn<String> img = GeneratedColumn<String>(
+      'img', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _totalMeta = const VerificationMeta('total');
+  @override
+  late final GeneratedColumn<double> total = GeneratedColumn<double>(
+      'total', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _subTotalMeta =
+      const VerificationMeta('subTotal');
+  @override
+  late final GeneratedColumn<double> subTotal = GeneratedColumn<double>(
+      'sub_total', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _discountMeta =
+      const VerificationMeta('discount');
+  @override
+  late final GeneratedColumn<double> discount = GeneratedColumn<double>(
+      'discount', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _itemsListMeta =
+      const VerificationMeta('itemsList');
+  @override
+  late final GeneratedColumn<String> itemsList = GeneratedColumn<String>(
+      'items_list', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _dateMeta = const VerificationMeta('date');
+  @override
+  late final GeneratedColumn<DateTime> date = GeneratedColumn<DateTime>(
+      'date', aliasedName, false,
+      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, isCombo, name, img, total, subTotal, discount, itemsList, date];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'cart_table';
+  @override
+  VerificationContext validateIntegrity(Insertable<CartTableData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('is_combo')) {
+      context.handle(_isComboMeta,
+          isCombo.isAcceptableOrUnknown(data['is_combo']!, _isComboMeta));
+    } else if (isInserting) {
+      context.missing(_isComboMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('img')) {
+      context.handle(
+          _imgMeta, img.isAcceptableOrUnknown(data['img']!, _imgMeta));
+    } else if (isInserting) {
+      context.missing(_imgMeta);
+    }
+    if (data.containsKey('total')) {
+      context.handle(
+          _totalMeta, total.isAcceptableOrUnknown(data['total']!, _totalMeta));
+    } else if (isInserting) {
+      context.missing(_totalMeta);
+    }
+    if (data.containsKey('sub_total')) {
+      context.handle(_subTotalMeta,
+          subTotal.isAcceptableOrUnknown(data['sub_total']!, _subTotalMeta));
+    } else if (isInserting) {
+      context.missing(_subTotalMeta);
+    }
+    if (data.containsKey('discount')) {
+      context.handle(_discountMeta,
+          discount.isAcceptableOrUnknown(data['discount']!, _discountMeta));
+    } else if (isInserting) {
+      context.missing(_discountMeta);
+    }
+    if (data.containsKey('items_list')) {
+      context.handle(_itemsListMeta,
+          itemsList.isAcceptableOrUnknown(data['items_list']!, _itemsListMeta));
+    } else if (isInserting) {
+      context.missing(_itemsListMeta);
+    }
+    if (data.containsKey('date')) {
+      context.handle(
+          _dateMeta, date.isAcceptableOrUnknown(data['date']!, _dateMeta));
+    } else if (isInserting) {
+      context.missing(_dateMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  CartTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return CartTableData(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      isCombo: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_combo'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      img: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}img'])!,
+      total: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}total'])!,
+      subTotal: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}sub_total'])!,
+      discount: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}discount'])!,
+      itemsList: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}items_list'])!,
+      date: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}date'])!,
+    );
+  }
+
+  @override
+  $CartTableTable createAlias(String alias) {
+    return $CartTableTable(attachedDatabase, alias);
+  }
+}
+
+class CartTableData extends DataClass implements Insertable<CartTableData> {
+  final int id;
+  final bool isCombo;
+  final String name;
+  final String img;
+  final double total;
+  final double subTotal;
+  final double discount;
+  final String itemsList;
+  final DateTime date;
+  const CartTableData(
+      {required this.id,
+      required this.isCombo,
+      required this.name,
+      required this.img,
+      required this.total,
+      required this.subTotal,
+      required this.discount,
+      required this.itemsList,
+      required this.date});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['is_combo'] = Variable<bool>(isCombo);
+    map['name'] = Variable<String>(name);
+    map['img'] = Variable<String>(img);
+    map['total'] = Variable<double>(total);
+    map['sub_total'] = Variable<double>(subTotal);
+    map['discount'] = Variable<double>(discount);
+    map['items_list'] = Variable<String>(itemsList);
+    map['date'] = Variable<DateTime>(date);
+    return map;
+  }
+
+  CartTableCompanion toCompanion(bool nullToAbsent) {
+    return CartTableCompanion(
+      id: Value(id),
+      isCombo: Value(isCombo),
+      name: Value(name),
+      img: Value(img),
+      total: Value(total),
+      subTotal: Value(subTotal),
+      discount: Value(discount),
+      itemsList: Value(itemsList),
+      date: Value(date),
+    );
+  }
+
+  factory CartTableData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return CartTableData(
+      id: serializer.fromJson<int>(json['id']),
+      isCombo: serializer.fromJson<bool>(json['isCombo']),
+      name: serializer.fromJson<String>(json['name']),
+      img: serializer.fromJson<String>(json['img']),
+      total: serializer.fromJson<double>(json['total']),
+      subTotal: serializer.fromJson<double>(json['subTotal']),
+      discount: serializer.fromJson<double>(json['discount']),
+      itemsList: serializer.fromJson<String>(json['itemsList']),
+      date: serializer.fromJson<DateTime>(json['date']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'isCombo': serializer.toJson<bool>(isCombo),
+      'name': serializer.toJson<String>(name),
+      'img': serializer.toJson<String>(img),
+      'total': serializer.toJson<double>(total),
+      'subTotal': serializer.toJson<double>(subTotal),
+      'discount': serializer.toJson<double>(discount),
+      'itemsList': serializer.toJson<String>(itemsList),
+      'date': serializer.toJson<DateTime>(date),
+    };
+  }
+
+  CartTableData copyWith(
+          {int? id,
+          bool? isCombo,
+          String? name,
+          String? img,
+          double? total,
+          double? subTotal,
+          double? discount,
+          String? itemsList,
+          DateTime? date}) =>
+      CartTableData(
+        id: id ?? this.id,
+        isCombo: isCombo ?? this.isCombo,
+        name: name ?? this.name,
+        img: img ?? this.img,
+        total: total ?? this.total,
+        subTotal: subTotal ?? this.subTotal,
+        discount: discount ?? this.discount,
+        itemsList: itemsList ?? this.itemsList,
+        date: date ?? this.date,
+      );
+  CartTableData copyWithCompanion(CartTableCompanion data) {
+    return CartTableData(
+      id: data.id.present ? data.id.value : this.id,
+      isCombo: data.isCombo.present ? data.isCombo.value : this.isCombo,
+      name: data.name.present ? data.name.value : this.name,
+      img: data.img.present ? data.img.value : this.img,
+      total: data.total.present ? data.total.value : this.total,
+      subTotal: data.subTotal.present ? data.subTotal.value : this.subTotal,
+      discount: data.discount.present ? data.discount.value : this.discount,
+      itemsList: data.itemsList.present ? data.itemsList.value : this.itemsList,
+      date: data.date.present ? data.date.value : this.date,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('CartTableData(')
+          ..write('id: $id, ')
+          ..write('isCombo: $isCombo, ')
+          ..write('name: $name, ')
+          ..write('img: $img, ')
+          ..write('total: $total, ')
+          ..write('subTotal: $subTotal, ')
+          ..write('discount: $discount, ')
+          ..write('itemsList: $itemsList, ')
+          ..write('date: $date')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      id, isCombo, name, img, total, subTotal, discount, itemsList, date);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is CartTableData &&
+          other.id == this.id &&
+          other.isCombo == this.isCombo &&
+          other.name == this.name &&
+          other.img == this.img &&
+          other.total == this.total &&
+          other.subTotal == this.subTotal &&
+          other.discount == this.discount &&
+          other.itemsList == this.itemsList &&
+          other.date == this.date);
+}
+
+class CartTableCompanion extends UpdateCompanion<CartTableData> {
+  final Value<int> id;
+  final Value<bool> isCombo;
+  final Value<String> name;
+  final Value<String> img;
+  final Value<double> total;
+  final Value<double> subTotal;
+  final Value<double> discount;
+  final Value<String> itemsList;
+  final Value<DateTime> date;
+  const CartTableCompanion({
+    this.id = const Value.absent(),
+    this.isCombo = const Value.absent(),
+    this.name = const Value.absent(),
+    this.img = const Value.absent(),
+    this.total = const Value.absent(),
+    this.subTotal = const Value.absent(),
+    this.discount = const Value.absent(),
+    this.itemsList = const Value.absent(),
+    this.date = const Value.absent(),
+  });
+  CartTableCompanion.insert({
+    this.id = const Value.absent(),
+    required bool isCombo,
+    required String name,
+    required String img,
+    required double total,
+    required double subTotal,
+    required double discount,
+    required String itemsList,
+    required DateTime date,
+  })  : isCombo = Value(isCombo),
+        name = Value(name),
+        img = Value(img),
+        total = Value(total),
+        subTotal = Value(subTotal),
+        discount = Value(discount),
+        itemsList = Value(itemsList),
+        date = Value(date);
+  static Insertable<CartTableData> custom({
+    Expression<int>? id,
+    Expression<bool>? isCombo,
+    Expression<String>? name,
+    Expression<String>? img,
+    Expression<double>? total,
+    Expression<double>? subTotal,
+    Expression<double>? discount,
+    Expression<String>? itemsList,
+    Expression<DateTime>? date,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (isCombo != null) 'is_combo': isCombo,
+      if (name != null) 'name': name,
+      if (img != null) 'img': img,
+      if (total != null) 'total': total,
+      if (subTotal != null) 'sub_total': subTotal,
+      if (discount != null) 'discount': discount,
+      if (itemsList != null) 'items_list': itemsList,
+      if (date != null) 'date': date,
+    });
+  }
+
+  CartTableCompanion copyWith(
+      {Value<int>? id,
+      Value<bool>? isCombo,
+      Value<String>? name,
+      Value<String>? img,
+      Value<double>? total,
+      Value<double>? subTotal,
+      Value<double>? discount,
+      Value<String>? itemsList,
+      Value<DateTime>? date}) {
+    return CartTableCompanion(
+      id: id ?? this.id,
+      isCombo: isCombo ?? this.isCombo,
+      name: name ?? this.name,
+      img: img ?? this.img,
+      total: total ?? this.total,
+      subTotal: subTotal ?? this.subTotal,
+      discount: discount ?? this.discount,
+      itemsList: itemsList ?? this.itemsList,
+      date: date ?? this.date,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (isCombo.present) {
+      map['is_combo'] = Variable<bool>(isCombo.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (img.present) {
+      map['img'] = Variable<String>(img.value);
+    }
+    if (total.present) {
+      map['total'] = Variable<double>(total.value);
+    }
+    if (subTotal.present) {
+      map['sub_total'] = Variable<double>(subTotal.value);
+    }
+    if (discount.present) {
+      map['discount'] = Variable<double>(discount.value);
+    }
+    if (itemsList.present) {
+      map['items_list'] = Variable<String>(itemsList.value);
+    }
+    if (date.present) {
+      map['date'] = Variable<DateTime>(date.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('CartTableCompanion(')
+          ..write('id: $id, ')
+          ..write('isCombo: $isCombo, ')
+          ..write('name: $name, ')
+          ..write('img: $img, ')
+          ..write('total: $total, ')
+          ..write('subTotal: $subTotal, ')
+          ..write('discount: $discount, ')
+          ..write('itemsList: $itemsList, ')
+          ..write('date: $date')
+          ..write(')'))
+        .toString();
+  }
+}
+
 class $TypeItemTableTable extends TypeItemTable
     with TableInfo<$TypeItemTableTable, TypeItemTableData> {
   @override
@@ -513,13 +960,20 @@ class $OrderTableTable extends OrderTable
   late final GeneratedColumn<double> discount = GeneratedColumn<double>(
       'discount', aliasedName, false,
       type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _paymentMethodMeta =
+      const VerificationMeta('paymentMethod');
+  @override
+  late final GeneratedColumn<String> paymentMethod = GeneratedColumn<String>(
+      'payment_method', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _dateMeta = const VerificationMeta('date');
   @override
   late final GeneratedColumn<DateTime> date = GeneratedColumn<DateTime>(
       'date', aliasedName, false,
       type: DriftSqlType.dateTime, requiredDuringInsert: true);
   @override
-  List<GeneratedColumn> get $columns => [id, total, subTotal, discount, date];
+  List<GeneratedColumn> get $columns =>
+      [id, total, subTotal, discount, paymentMethod, date];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -551,6 +1005,14 @@ class $OrderTableTable extends OrderTable
     } else if (isInserting) {
       context.missing(_discountMeta);
     }
+    if (data.containsKey('payment_method')) {
+      context.handle(
+          _paymentMethodMeta,
+          paymentMethod.isAcceptableOrUnknown(
+              data['payment_method']!, _paymentMethodMeta));
+    } else if (isInserting) {
+      context.missing(_paymentMethodMeta);
+    }
     if (data.containsKey('date')) {
       context.handle(
           _dateMeta, date.isAcceptableOrUnknown(data['date']!, _dateMeta));
@@ -574,6 +1036,8 @@ class $OrderTableTable extends OrderTable
           .read(DriftSqlType.double, data['${effectivePrefix}sub_total'])!,
       discount: attachedDatabase.typeMapping
           .read(DriftSqlType.double, data['${effectivePrefix}discount'])!,
+      paymentMethod: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}payment_method'])!,
       date: attachedDatabase.typeMapping
           .read(DriftSqlType.dateTime, data['${effectivePrefix}date'])!,
     );
@@ -590,12 +1054,14 @@ class OrderTableData extends DataClass implements Insertable<OrderTableData> {
   final double total;
   final double subTotal;
   final double discount;
+  final String paymentMethod;
   final DateTime date;
   const OrderTableData(
       {required this.id,
       required this.total,
       required this.subTotal,
       required this.discount,
+      required this.paymentMethod,
       required this.date});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -604,6 +1070,7 @@ class OrderTableData extends DataClass implements Insertable<OrderTableData> {
     map['total'] = Variable<double>(total);
     map['sub_total'] = Variable<double>(subTotal);
     map['discount'] = Variable<double>(discount);
+    map['payment_method'] = Variable<String>(paymentMethod);
     map['date'] = Variable<DateTime>(date);
     return map;
   }
@@ -614,6 +1081,7 @@ class OrderTableData extends DataClass implements Insertable<OrderTableData> {
       total: Value(total),
       subTotal: Value(subTotal),
       discount: Value(discount),
+      paymentMethod: Value(paymentMethod),
       date: Value(date),
     );
   }
@@ -626,6 +1094,7 @@ class OrderTableData extends DataClass implements Insertable<OrderTableData> {
       total: serializer.fromJson<double>(json['total']),
       subTotal: serializer.fromJson<double>(json['subTotal']),
       discount: serializer.fromJson<double>(json['discount']),
+      paymentMethod: serializer.fromJson<String>(json['paymentMethod']),
       date: serializer.fromJson<DateTime>(json['date']),
     );
   }
@@ -637,6 +1106,7 @@ class OrderTableData extends DataClass implements Insertable<OrderTableData> {
       'total': serializer.toJson<double>(total),
       'subTotal': serializer.toJson<double>(subTotal),
       'discount': serializer.toJson<double>(discount),
+      'paymentMethod': serializer.toJson<String>(paymentMethod),
       'date': serializer.toJson<DateTime>(date),
     };
   }
@@ -646,12 +1116,14 @@ class OrderTableData extends DataClass implements Insertable<OrderTableData> {
           double? total,
           double? subTotal,
           double? discount,
+          String? paymentMethod,
           DateTime? date}) =>
       OrderTableData(
         id: id ?? this.id,
         total: total ?? this.total,
         subTotal: subTotal ?? this.subTotal,
         discount: discount ?? this.discount,
+        paymentMethod: paymentMethod ?? this.paymentMethod,
         date: date ?? this.date,
       );
   OrderTableData copyWithCompanion(OrderTableCompanion data) {
@@ -660,6 +1132,9 @@ class OrderTableData extends DataClass implements Insertable<OrderTableData> {
       total: data.total.present ? data.total.value : this.total,
       subTotal: data.subTotal.present ? data.subTotal.value : this.subTotal,
       discount: data.discount.present ? data.discount.value : this.discount,
+      paymentMethod: data.paymentMethod.present
+          ? data.paymentMethod.value
+          : this.paymentMethod,
       date: data.date.present ? data.date.value : this.date,
     );
   }
@@ -671,13 +1146,15 @@ class OrderTableData extends DataClass implements Insertable<OrderTableData> {
           ..write('total: $total, ')
           ..write('subTotal: $subTotal, ')
           ..write('discount: $discount, ')
+          ..write('paymentMethod: $paymentMethod, ')
           ..write('date: $date')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, total, subTotal, discount, date);
+  int get hashCode =>
+      Object.hash(id, total, subTotal, discount, paymentMethod, date);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -686,6 +1163,7 @@ class OrderTableData extends DataClass implements Insertable<OrderTableData> {
           other.total == this.total &&
           other.subTotal == this.subTotal &&
           other.discount == this.discount &&
+          other.paymentMethod == this.paymentMethod &&
           other.date == this.date);
 }
 
@@ -694,12 +1172,14 @@ class OrderTableCompanion extends UpdateCompanion<OrderTableData> {
   final Value<double> total;
   final Value<double> subTotal;
   final Value<double> discount;
+  final Value<String> paymentMethod;
   final Value<DateTime> date;
   const OrderTableCompanion({
     this.id = const Value.absent(),
     this.total = const Value.absent(),
     this.subTotal = const Value.absent(),
     this.discount = const Value.absent(),
+    this.paymentMethod = const Value.absent(),
     this.date = const Value.absent(),
   });
   OrderTableCompanion.insert({
@@ -707,16 +1187,19 @@ class OrderTableCompanion extends UpdateCompanion<OrderTableData> {
     required double total,
     required double subTotal,
     required double discount,
+    required String paymentMethod,
     required DateTime date,
   })  : total = Value(total),
         subTotal = Value(subTotal),
         discount = Value(discount),
+        paymentMethod = Value(paymentMethod),
         date = Value(date);
   static Insertable<OrderTableData> custom({
     Expression<int>? id,
     Expression<double>? total,
     Expression<double>? subTotal,
     Expression<double>? discount,
+    Expression<String>? paymentMethod,
     Expression<DateTime>? date,
   }) {
     return RawValuesInsertable({
@@ -724,6 +1207,7 @@ class OrderTableCompanion extends UpdateCompanion<OrderTableData> {
       if (total != null) 'total': total,
       if (subTotal != null) 'sub_total': subTotal,
       if (discount != null) 'discount': discount,
+      if (paymentMethod != null) 'payment_method': paymentMethod,
       if (date != null) 'date': date,
     });
   }
@@ -733,12 +1217,14 @@ class OrderTableCompanion extends UpdateCompanion<OrderTableData> {
       Value<double>? total,
       Value<double>? subTotal,
       Value<double>? discount,
+      Value<String>? paymentMethod,
       Value<DateTime>? date}) {
     return OrderTableCompanion(
       id: id ?? this.id,
       total: total ?? this.total,
       subTotal: subTotal ?? this.subTotal,
       discount: discount ?? this.discount,
+      paymentMethod: paymentMethod ?? this.paymentMethod,
       date: date ?? this.date,
     );
   }
@@ -758,6 +1244,9 @@ class OrderTableCompanion extends UpdateCompanion<OrderTableData> {
     if (discount.present) {
       map['discount'] = Variable<double>(discount.value);
     }
+    if (paymentMethod.present) {
+      map['payment_method'] = Variable<String>(paymentMethod.value);
+    }
     if (date.present) {
       map['date'] = Variable<DateTime>(date.value);
     }
@@ -771,6 +1260,7 @@ class OrderTableCompanion extends UpdateCompanion<OrderTableData> {
           ..write('total: $total, ')
           ..write('subTotal: $subTotal, ')
           ..write('discount: $discount, ')
+          ..write('paymentMethod: $paymentMethod, ')
           ..write('date: $date')
           ..write(')'))
         .toString();
@@ -789,7 +1279,7 @@ class $OrderItemTableTable extends OrderItemTable
       'id', aliasedName, false,
       hasAutoIncrement: true,
       type: DriftSqlType.int,
-      requiredDuringInsert: true,
+      requiredDuringInsert: false,
       defaultConstraints:
           GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
   static const VerificationMeta _nameMeta = const VerificationMeta('name');
@@ -802,11 +1292,7 @@ class $OrderItemTableTable extends OrderItemTable
   @override
   late final GeneratedColumn<int> quantity = GeneratedColumn<int>(
       'quantity', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: true,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _priceMeta = const VerificationMeta('price');
   @override
   late final GeneratedColumn<double> price = GeneratedColumn<double>(
@@ -844,8 +1330,6 @@ class $OrderItemTableTable extends OrderItemTable
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
-    } else if (isInserting) {
-      context.missing(_idMeta);
     }
     if (data.containsKey('name')) {
       context.handle(
@@ -881,7 +1365,7 @@ class $OrderItemTableTable extends OrderItemTable
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {id, quantity};
+  Set<GeneratedColumn> get $primaryKey => {id};
   @override
   OrderItemTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
@@ -1030,7 +1514,6 @@ class OrderItemTableCompanion extends UpdateCompanion<OrderItemTableData> {
   final Value<double> price;
   final Value<int> itemId;
   final Value<int> orderId;
-  final Value<int> rowid;
   const OrderItemTableCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
@@ -1038,18 +1521,15 @@ class OrderItemTableCompanion extends UpdateCompanion<OrderItemTableData> {
     this.price = const Value.absent(),
     this.itemId = const Value.absent(),
     this.orderId = const Value.absent(),
-    this.rowid = const Value.absent(),
   });
   OrderItemTableCompanion.insert({
-    required int id,
+    this.id = const Value.absent(),
     required String name,
     required int quantity,
     required double price,
     required int itemId,
     required int orderId,
-    this.rowid = const Value.absent(),
-  })  : id = Value(id),
-        name = Value(name),
+  })  : name = Value(name),
         quantity = Value(quantity),
         price = Value(price),
         itemId = Value(itemId),
@@ -1061,7 +1541,6 @@ class OrderItemTableCompanion extends UpdateCompanion<OrderItemTableData> {
     Expression<double>? price,
     Expression<int>? itemId,
     Expression<int>? orderId,
-    Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -1070,7 +1549,6 @@ class OrderItemTableCompanion extends UpdateCompanion<OrderItemTableData> {
       if (price != null) 'price': price,
       if (itemId != null) 'item_id': itemId,
       if (orderId != null) 'order_id': orderId,
-      if (rowid != null) 'rowid': rowid,
     });
   }
 
@@ -1080,8 +1558,7 @@ class OrderItemTableCompanion extends UpdateCompanion<OrderItemTableData> {
       Value<int>? quantity,
       Value<double>? price,
       Value<int>? itemId,
-      Value<int>? orderId,
-      Value<int>? rowid}) {
+      Value<int>? orderId}) {
     return OrderItemTableCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -1089,7 +1566,6 @@ class OrderItemTableCompanion extends UpdateCompanion<OrderItemTableData> {
       price: price ?? this.price,
       itemId: itemId ?? this.itemId,
       orderId: orderId ?? this.orderId,
-      rowid: rowid ?? this.rowid,
     );
   }
 
@@ -1114,9 +1590,6 @@ class OrderItemTableCompanion extends UpdateCompanion<OrderItemTableData> {
     if (orderId.present) {
       map['order_id'] = Variable<int>(orderId.value);
     }
-    if (rowid.present) {
-      map['rowid'] = Variable<int>(rowid.value);
-    }
     return map;
   }
 
@@ -1128,8 +1601,7 @@ class OrderItemTableCompanion extends UpdateCompanion<OrderItemTableData> {
           ..write('quantity: $quantity, ')
           ..write('price: $price, ')
           ..write('itemId: $itemId, ')
-          ..write('orderId: $orderId, ')
-          ..write('rowid: $rowid')
+          ..write('orderId: $orderId')
           ..write(')'))
         .toString();
   }
@@ -1138,6 +1610,7 @@ class OrderItemTableCompanion extends UpdateCompanion<OrderItemTableData> {
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
+  late final $CartTableTable cartTable = $CartTableTable(this);
   late final $TypeItemTableTable typeItemTable = $TypeItemTableTable(this);
   late final $ItemTableTable itemTable = $ItemTableTable(this);
   late final $OrderTableTable orderTable = $OrderTableTable(this);
@@ -1147,7 +1620,191 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [typeItemTable, itemTable, orderTable, orderItemTable];
+      [cartTable, typeItemTable, itemTable, orderTable, orderItemTable];
+}
+
+typedef $$CartTableTableCreateCompanionBuilder = CartTableCompanion Function({
+  Value<int> id,
+  required bool isCombo,
+  required String name,
+  required String img,
+  required double total,
+  required double subTotal,
+  required double discount,
+  required String itemsList,
+  required DateTime date,
+});
+typedef $$CartTableTableUpdateCompanionBuilder = CartTableCompanion Function({
+  Value<int> id,
+  Value<bool> isCombo,
+  Value<String> name,
+  Value<String> img,
+  Value<double> total,
+  Value<double> subTotal,
+  Value<double> discount,
+  Value<String> itemsList,
+  Value<DateTime> date,
+});
+
+class $$CartTableTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $CartTableTable,
+    CartTableData,
+    $$CartTableTableFilterComposer,
+    $$CartTableTableOrderingComposer,
+    $$CartTableTableCreateCompanionBuilder,
+    $$CartTableTableUpdateCompanionBuilder> {
+  $$CartTableTableTableManager(_$AppDatabase db, $CartTableTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$CartTableTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$CartTableTableOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<bool> isCombo = const Value.absent(),
+            Value<String> name = const Value.absent(),
+            Value<String> img = const Value.absent(),
+            Value<double> total = const Value.absent(),
+            Value<double> subTotal = const Value.absent(),
+            Value<double> discount = const Value.absent(),
+            Value<String> itemsList = const Value.absent(),
+            Value<DateTime> date = const Value.absent(),
+          }) =>
+              CartTableCompanion(
+            id: id,
+            isCombo: isCombo,
+            name: name,
+            img: img,
+            total: total,
+            subTotal: subTotal,
+            discount: discount,
+            itemsList: itemsList,
+            date: date,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            required bool isCombo,
+            required String name,
+            required String img,
+            required double total,
+            required double subTotal,
+            required double discount,
+            required String itemsList,
+            required DateTime date,
+          }) =>
+              CartTableCompanion.insert(
+            id: id,
+            isCombo: isCombo,
+            name: name,
+            img: img,
+            total: total,
+            subTotal: subTotal,
+            discount: discount,
+            itemsList: itemsList,
+            date: date,
+          ),
+        ));
+}
+
+class $$CartTableTableFilterComposer
+    extends FilterComposer<_$AppDatabase, $CartTableTable> {
+  $$CartTableTableFilterComposer(super.$state);
+  ColumnFilters<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<bool> get isCombo => $state.composableBuilder(
+      column: $state.table.isCombo,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get img => $state.composableBuilder(
+      column: $state.table.img,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<double> get total => $state.composableBuilder(
+      column: $state.table.total,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<double> get subTotal => $state.composableBuilder(
+      column: $state.table.subTotal,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<double> get discount => $state.composableBuilder(
+      column: $state.table.discount,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get itemsList => $state.composableBuilder(
+      column: $state.table.itemsList,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<DateTime> get date => $state.composableBuilder(
+      column: $state.table.date,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $$CartTableTableOrderingComposer
+    extends OrderingComposer<_$AppDatabase, $CartTableTable> {
+  $$CartTableTableOrderingComposer(super.$state);
+  ColumnOrderings<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<bool> get isCombo => $state.composableBuilder(
+      column: $state.table.isCombo,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get img => $state.composableBuilder(
+      column: $state.table.img,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<double> get total => $state.composableBuilder(
+      column: $state.table.total,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<double> get subTotal => $state.composableBuilder(
+      column: $state.table.subTotal,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<double> get discount => $state.composableBuilder(
+      column: $state.table.discount,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get itemsList => $state.composableBuilder(
+      column: $state.table.itemsList,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<DateTime> get date => $state.composableBuilder(
+      column: $state.table.date,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
 typedef $$TypeItemTableTableCreateCompanionBuilder = TypeItemTableCompanion
@@ -1390,6 +2047,7 @@ typedef $$OrderTableTableCreateCompanionBuilder = OrderTableCompanion Function({
   required double total,
   required double subTotal,
   required double discount,
+  required String paymentMethod,
   required DateTime date,
 });
 typedef $$OrderTableTableUpdateCompanionBuilder = OrderTableCompanion Function({
@@ -1397,6 +2055,7 @@ typedef $$OrderTableTableUpdateCompanionBuilder = OrderTableCompanion Function({
   Value<double> total,
   Value<double> subTotal,
   Value<double> discount,
+  Value<String> paymentMethod,
   Value<DateTime> date,
 });
 
@@ -1421,6 +2080,7 @@ class $$OrderTableTableTableManager extends RootTableManager<
             Value<double> total = const Value.absent(),
             Value<double> subTotal = const Value.absent(),
             Value<double> discount = const Value.absent(),
+            Value<String> paymentMethod = const Value.absent(),
             Value<DateTime> date = const Value.absent(),
           }) =>
               OrderTableCompanion(
@@ -1428,6 +2088,7 @@ class $$OrderTableTableTableManager extends RootTableManager<
             total: total,
             subTotal: subTotal,
             discount: discount,
+            paymentMethod: paymentMethod,
             date: date,
           ),
           createCompanionCallback: ({
@@ -1435,6 +2096,7 @@ class $$OrderTableTableTableManager extends RootTableManager<
             required double total,
             required double subTotal,
             required double discount,
+            required String paymentMethod,
             required DateTime date,
           }) =>
               OrderTableCompanion.insert(
@@ -1442,6 +2104,7 @@ class $$OrderTableTableTableManager extends RootTableManager<
             total: total,
             subTotal: subTotal,
             discount: discount,
+            paymentMethod: paymentMethod,
             date: date,
           ),
         ));
@@ -1467,6 +2130,11 @@ class $$OrderTableTableFilterComposer
 
   ColumnFilters<double> get discount => $state.composableBuilder(
       column: $state.table.discount,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get paymentMethod => $state.composableBuilder(
+      column: $state.table.paymentMethod,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -1512,6 +2180,11 @@ class $$OrderTableTableOrderingComposer
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
+  ColumnOrderings<String> get paymentMethod => $state.composableBuilder(
+      column: $state.table.paymentMethod,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
   ColumnOrderings<DateTime> get date => $state.composableBuilder(
       column: $state.table.date,
       builder: (column, joinBuilders) =>
@@ -1520,13 +2193,12 @@ class $$OrderTableTableOrderingComposer
 
 typedef $$OrderItemTableTableCreateCompanionBuilder = OrderItemTableCompanion
     Function({
-  required int id,
+  Value<int> id,
   required String name,
   required int quantity,
   required double price,
   required int itemId,
   required int orderId,
-  Value<int> rowid,
 });
 typedef $$OrderItemTableTableUpdateCompanionBuilder = OrderItemTableCompanion
     Function({
@@ -1536,7 +2208,6 @@ typedef $$OrderItemTableTableUpdateCompanionBuilder = OrderItemTableCompanion
   Value<double> price,
   Value<int> itemId,
   Value<int> orderId,
-  Value<int> rowid,
 });
 
 class $$OrderItemTableTableTableManager extends RootTableManager<
@@ -1563,7 +2234,6 @@ class $$OrderItemTableTableTableManager extends RootTableManager<
             Value<double> price = const Value.absent(),
             Value<int> itemId = const Value.absent(),
             Value<int> orderId = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
           }) =>
               OrderItemTableCompanion(
             id: id,
@@ -1572,16 +2242,14 @@ class $$OrderItemTableTableTableManager extends RootTableManager<
             price: price,
             itemId: itemId,
             orderId: orderId,
-            rowid: rowid,
           ),
           createCompanionCallback: ({
-            required int id,
+            Value<int> id = const Value.absent(),
             required String name,
             required int quantity,
             required double price,
             required int itemId,
             required int orderId,
-            Value<int> rowid = const Value.absent(),
           }) =>
               OrderItemTableCompanion.insert(
             id: id,
@@ -1590,7 +2258,6 @@ class $$OrderItemTableTableTableManager extends RootTableManager<
             price: price,
             itemId: itemId,
             orderId: orderId,
-            rowid: rowid,
           ),
         ));
 }
@@ -1694,6 +2361,8 @@ class $$OrderItemTableTableOrderingComposer
 class $AppDatabaseManager {
   final _$AppDatabase _db;
   $AppDatabaseManager(this._db);
+  $$CartTableTableTableManager get cartTable =>
+      $$CartTableTableTableManager(_db, _db.cartTable);
   $$TypeItemTableTableTableManager get typeItemTable =>
       $$TypeItemTableTableTableManager(_db, _db.typeItemTable);
   $$ItemTableTableTableManager get itemTable =>
