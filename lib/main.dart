@@ -1,10 +1,11 @@
 import 'package:bom_hamburguer/enum/item_options_enum.dart';
-import 'package:bom_hamburguer/ui/view/cart_screen.dart';
 import 'package:bom_hamburguer/ui/view/header_screen.dart';
+import 'package:bom_hamburguer/ui/view/order_screen.dart';
 import 'package:bom_hamburguer/ui/view/widgets/items_list.dart';
 import 'package:bom_hamburguer/ui/view/widgets/item_options.dart';
 import 'package:bom_hamburguer/ui/viewModel/cart_view_model.dart';
 import 'package:bom_hamburguer/ui/viewModel/item_list_view_model.dart';
+import 'package:bom_hamburguer/ui/viewModel/order_view_model.dart';
 import 'package:bom_hamburguer/ui/viewModel/payment_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +17,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => ItemListViewModel()),
         ChangeNotifierProvider(create: (_) => CartViewModel()),
         ChangeNotifierProvider(create: (_) => PaymentViewModel()),
+        ChangeNotifierProvider(create: (_) => OrderViewModel()),
       ],
       child: const MyApp(),
     ),
@@ -70,11 +72,11 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const CartScreen()),
+            MaterialPageRoute(builder: (context) => const OrderScreen()),
           );
         },
-        label: const Text('Cart'),
-        icon: const Icon(Icons.shopping_cart),
+        label: const Text('Orders'),
+        icon: const Icon(Icons.list),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );

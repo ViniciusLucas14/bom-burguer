@@ -17,18 +17,19 @@ class PaymentViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void submitPayment(BuildContext context, OrderModel orderModel) {
+  bool submitPayment(OrderModel orderModel) {
     if (selectedOption == null) {
       Notifications.toastMessageAlert('Please, choose a payment method');
-      return;
+      return false;
     }
     if (nameController.text.isEmpty) {
       Notifications.toastMessageAlert('Please, enter your name');
-      return;
+      return false;
     }
     orderModel.paymentMethod = selectedOption!;
     _orderRepository.add(orderModel);
-    Navigator.pop(context);
+    Notifications.toastMessageSucess('Payment successful. Your order is being processed.');
+    return true;
   }
 
   @override

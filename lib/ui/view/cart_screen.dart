@@ -1,3 +1,4 @@
+import 'package:bom_hamburguer/main.dart';
 import 'package:bom_hamburguer/models/Order_model.dart';
 import 'package:bom_hamburguer/models/cart_model.dart';
 import 'package:bom_hamburguer/ui/view/widgets/payment_modal.dart';
@@ -21,13 +22,25 @@ class CartScreen extends StatelessWidget {
         paymentMethod: '',
         date: DateTime.now(),
       );
+
       if (!context.mounted) return;
-      showDialog<void>(
+      final sucess = await showDialog<bool>(
         context: context,
         builder: (BuildContext context) {
           return PaymentModal(orderViewModel: order);
         },
       );
+
+      if (sucess == true) {
+        Future.microtask(() {
+          Provider.of<CartViewModel>(context, listen: false).clearCart();
+        });
+        if (!context.mounted) return;
+
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+      }
     }
 
     return Scaffold(
@@ -42,13 +55,32 @@ class CartScreen extends StatelessWidget {
               }
 
               if (snapshot.hasError) {
-                return const Center(child: Text('Erro ao carregar o carrinho'));
+                return const Center(child: Text('Failed to load cart'));
               }
 
               final items = snapshot.data ?? [];
 
               if (items.isEmpty) {
-                return const Center(child: Text('Carrinho vazio'));
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Center(
+                        child:
+                            Text('Cart empty. Please, add items in the menu.')),
+                    const SizedBox(height: 16),
+                    FloatingActionButton(
+                      onPressed: () => {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => const HomePage()),
+                        )
+                      },
+                      tooltip: 'Back to Home',
+                      child: const Icon(Icons.arrow_back),
+                    ),
+                  ],
+                );
               }
 
               return Column(
@@ -125,7 +157,23 @@ class CartScreen extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(16),
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: FloatingActionButton(
+                        onPressed: () => {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => const HomePage()),
+                          )
+                        },
+                        tooltip: 'Back to Home',
+                        child: const Icon(Icons.arrow_back),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16),
                     child: Row(
                       children: [
                         Expanded(

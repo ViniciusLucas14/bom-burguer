@@ -48,4 +48,8 @@ class CartRepository {
   Future<void> clear() {
     return _cartService.clearCart();
   }
+
+  Future<int> countItemsCart() {
+    return _cartService.countItemsCart();
+  }
 }

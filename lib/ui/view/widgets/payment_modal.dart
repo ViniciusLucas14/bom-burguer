@@ -51,7 +51,10 @@ class PaymentModal extends StatelessWidget {
             Align(
               alignment: Alignment.bottomRight,
               child: TextButton(
-                onPressed: () => viewModel.submitPayment(context, orderViewModel),
+                onPressed: () => {
+                  if (viewModel.submitPayment(orderViewModel))
+                    Navigator.pop(context, true)
+                },
                 child: const Text('Submit'),
               ),
             ),

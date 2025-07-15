@@ -5,6 +5,21 @@ import 'package:flutter/material.dart';
 
 class CartViewModel with ChangeNotifier {
   final CartRepository _cartRepository = CartRepository();
+  int _itemCount = 0;
+  int get itemCount => _itemCount;
+
+  CartViewModel() {
+    _loadItemCount();
+  }
+
+  Future<void> _loadItemCount() async {
+    _itemCount = await _cartRepository.countItemsCart();
+    notifyListeners();
+  }
+
+  Future<void> refreshCartCount() async {
+    await _loadItemCount();
+  }
 
   Future<List<CartModel>> getItems() {
     return _cartRepository.getAll();
@@ -20,6 +35,7 @@ class CartViewModel with ChangeNotifier {
 
     await _cartRepository.add(item);
     Notifications.toastMessageSucess("Item: ${item.name} add to cart");
+    await refreshCartCount();
     notifyListeners();
   }
 
@@ -30,11 +46,13 @@ class CartViewModel with ChangeNotifier {
     }
     await _cartRepository.remove(item);
     Notifications.toastMessageSucess("Item: ${item.name} removed from cart");
+    await refreshCartCount();
     notifyListeners();
   }
 
   Future<void> clearCart() async {
     await _cartRepository.clear();
+    await refreshCartCount();
     notifyListeners();
   }
 }

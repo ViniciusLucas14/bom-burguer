@@ -1,5 +1,8 @@
 import 'package:bom_hamburguer/main.dart';
+import 'package:bom_hamburguer/ui/view/cart_screen.dart';
+import 'package:bom_hamburguer/ui/viewModel/cart_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HeaderScreen extends StatelessWidget implements PreferredSizeWidget {
   const HeaderScreen({super.key});
@@ -38,15 +41,26 @@ class HeaderScreen extends StatelessWidget implements PreferredSizeWidget {
           tooltip: 'Menu',
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              // ação do botão à direita
+          Consumer<CartViewModel>(
+            builder: (context, cartViewModel, child) {
+              final count = cartViewModel.itemCount;
+
+              return IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const CartScreen()),
+                  );
+                },
+                icon: Badge(
+                  label: Text(
+                    count.toString(),
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  child: const Icon(Icons.shopping_cart, color: Colors.brown),
+                ),
+                tooltip: 'Cart',
+              );
             },
-            icon: const Badge(
-              label: Text('4'),
-              child: Icon(Icons.list),
-            ),
-            tooltip: 'Pedidos',
           ),
         ],
       ),

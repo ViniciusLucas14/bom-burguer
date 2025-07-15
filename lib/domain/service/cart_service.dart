@@ -39,4 +39,8 @@ class CartService {
       return idsToCheck.any((id) => existingIds.contains(id));
     });
   }
+
+  Future<int> countItemsCart() async {
+    return (await _db.select(_db.cartTable).get()).length;
+  }
 }
