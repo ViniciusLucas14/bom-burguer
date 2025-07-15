@@ -1,7 +1,7 @@
 # 🍔 BOM HAMBURGUER - Order Management App
 
 A mobile application developed with Flutter (Android/iOS) to simplify the customer ordering process at **BOM HAMBURGUER**, allowing users to place customized sandwich orders, apply discounts based on combinations, and manage their cart and orders with ease.
- ![alt text](https://prnt.sc/Vd_aZfxmgx_o "Home page")
+<img width="399" height="857" alt="Image" src="https://github.com/user-attachments/assets/035519ee-01bb-47b9-8d68-5940c85b57c9" />
 ## 📱 Features
 ### 1. List Products
 - View all available **sandwiches** and **extras**.
