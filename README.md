@@ -3,6 +3,9 @@
 A mobile application developed with Flutter (Android/iOS) to simplify the customer ordering process at **BOM HAMBURGUER**, allowing users to place customized sandwich orders, apply discounts based on combinations, and manage their cart and orders with ease.
 <img width="990" height="440" alt="Image" src="https://github.com/user-attachments/assets/1937958e-4ec8-4535-8a97-8421c5e8b753" />
 <img width="990" height="440" alt="Image" src="https://github.com/user-attachments/assets/dc8ad351-7c8b-4c0e-8292-dd55cc278cb5" />
+
+▶ DEMO YOUTUBE 🎥> https://youtu.be/3jsQZ_7AEUU 
+
 ## 📱 Features
 ### 1. List Products
 - View all available **sandwiches** and **extras**.
@@ -59,3 +62,5 @@ lib/
 │ ├── view/
 │ └── viewModel/
 └── utils/
+
+Documentation: https://docs.google.com/document/d/1OXK0ze2xfSZuk59CWj7kmkiIfms0zZWEeHeU02ZU3Ok/edit?usp=sharing
